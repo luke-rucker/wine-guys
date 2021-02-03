@@ -18,8 +18,8 @@ export default function ProductList({ products }) {
 
 function ProductCard({ product }) {
     return (
-        <Link href={`/products/${product.slug}`}>
-            <Card link key={product.id}>
+        <Link href={`/products/${product.slug}`} key={product.id}>
+            <Card link>
                 <SemanticImage>
                     <Image
                         src={product.imageUrl}
