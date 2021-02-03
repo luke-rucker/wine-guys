@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "repository": "https://github.com/luke-rucker/wein-guys.git",
   "author": "Luke Rucker <ruckerlh@gmail.com>",
+  "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",

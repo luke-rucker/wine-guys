@@ -8,7 +8,7 @@ export default function ProductList({ products }) {
     return (
         <Card.Group itemsPerRow={2} centered stackable>
             {products.map(product => (
-                <ProductCard product={product} />
+                <ProductCard product={product} key={product.id} />
             ))}
         </Card.Group>
     )
@@ -16,7 +16,7 @@ export default function ProductList({ products }) {
 
 function ProductCard({ product }) {
     return (
-        <Link href={`/products/${product.slug}`} key={product.id}>
+        <Link href={`/products/${product.slug}`}>
             <Card link>
                 <SemanticImage>
                     <Image

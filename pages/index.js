@@ -1,10 +1,11 @@
 import { Container } from 'semantic-ui-react'
-import { ProductList } from '../components'
+import { Logo, ProductList } from '../components'
 import prisma from '../prisma'
 
 export default function Store({ products }) {
     return (
         <Container text>
+            <Logo />
             <ProductList products={products} />
         </Container>
     )
