@@ -2,11 +2,10 @@ import React from 'react'
 import { Card, Image as SemanticImage } from 'semantic-ui-react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { formatCurrency } from '../util'
 
 export default function ProductList({ products }) {
     return (
-        <Card.Group itemsPerRow={2} centered stackable>
+        <Card.Group itemsPerRow={2} stackable>
             {products.map(product => (
                 <ProductCard product={product} key={product.id} />
             ))}
@@ -30,7 +29,7 @@ function ProductCard({ product }) {
                 <Card.Content>
                     <Card.Header>{product.name}</Card.Header>
                     <Card.Meta style={{ color: 'dimgray' }}>
-                        {formatCurrency(product.price)}
+                        {product.formattedPrice}
                     </Card.Meta>
                 </Card.Content>
             </Card>
