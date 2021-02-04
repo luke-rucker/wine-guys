@@ -1,8 +1,6 @@
 import { useRouter } from 'next/router'
 import Link from 'next/link'
-import { Menu, Container } from 'semantic-ui-react'
-import Icon from './icon'
-import ShoppingCartIcon from './shopping-cart-icon'
+import { Menu, Container, Image, Icon } from 'semantic-ui-react'
 
 export default function Navbar() {
     const router = useRouter()
@@ -11,8 +9,8 @@ export default function Navbar() {
         <Menu size="huge" borderless pointing>
             <Container text>
                 <Link href="/">
-                    <Menu.Item active={router.pathname === '/'}>
-                        <Icon />
+                    <Menu.Item active={router.pathname === '/'} header>
+                        <Image src="/icon.svg" alt="icon" size="mini" />
                         Store
                     </Menu.Item>
                 </Link>
@@ -26,5 +24,14 @@ export default function Navbar() {
                 </Link>
             </Container>
         </Menu>
+    )
+}
+
+function ShoppingCartIcon({ itemCount }) {
+    return (
+        <>
+            <Icon name="cart" />
+            Cart ({itemCount || 0})
+        </>
     )
 }
