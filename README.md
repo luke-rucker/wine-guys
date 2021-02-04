@@ -1,6 +1,6 @@
 ## Wein Guys
 
-Store front for Wein Guys - a wine delivery business I cofounded at Jacobs University Bremen.
+Storefront for Wein Guys - a wine delivery business I cofounded at Jacobs University Bremen.
 
 Tech Stack:
 
