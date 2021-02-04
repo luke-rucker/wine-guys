@@ -1,9 +1,14 @@
-import { ProductSummary } from '../../components'
+import { ProductSummary, ProductDescription } from '../../components'
 import prisma from '../../prisma'
 import { formatCurrency } from '../../util'
 
 export default function Product({ product }) {
-    return <ProductSummary product={product} />
+    return (
+        <>
+            <ProductSummary product={product} />
+            <ProductDescription product={product} />
+        </>
+    )
 }
 
 export async function getStaticPaths() {
