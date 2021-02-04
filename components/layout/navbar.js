@@ -1,6 +1,9 @@
 import { useRouter } from 'next/router'
 import Link from 'next/link'
-import { Menu, Container, Image, Icon } from 'semantic-ui-react'
+import dynamic from 'next/dynamic'
+import { Menu, Container, Image } from 'semantic-ui-react'
+
+const CartIcon = dynamic(() => import('./cart-icon'), { ssr: false })
 
 export default function Navbar() {
     const router = useRouter()
@@ -19,19 +22,10 @@ export default function Navbar() {
                         active={router.pathname === '/cart'}
                         position="right"
                     >
-                        <ShoppingCartIcon itemCount={0} />
+                        <CartIcon />
                     </Menu.Item>
                 </Link>
             </Container>
         </Menu>
-    )
-}
-
-function ShoppingCartIcon({ itemCount }) {
-    return (
-        <>
-            <Icon name="cart" />
-            Cart ({itemCount || 0})
-        </>
     )
 }

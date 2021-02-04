@@ -1,4 +1,7 @@
+import dynamic from 'next/dynamic'
 import { Item } from 'semantic-ui-react'
+
+const AddToCart = dynamic(() => import('./add-to-cart'), { ssr: false })
 
 export default function ProductSummary({ product }) {
     return (
@@ -15,7 +18,7 @@ export default function ProductSummary({ product }) {
                         <p>{product.formattedPrice}</p>
                     </Item.Description>
                     <Item.Extra>
-                        <p>Add to cart</p>
+                        <AddToCart product={product} />
                     </Item.Extra>
                 </Item.Content>
             </Item>
