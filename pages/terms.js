@@ -1,3 +1,12 @@
+import Head from 'next/head'
+
 export default function Terms() {
-    return <h1>Terms</h1>
+    return (
+        <>
+            <Head>
+                <title>Terms | Wein Guys</title>
+            </Head>
+            <h1>Terms</h1>
+        </>
+    )
 }

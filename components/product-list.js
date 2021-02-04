@@ -1,4 +1,3 @@
-import React from 'react'
 import { Card, Image as SemanticImage } from 'semantic-ui-react'
 import Image from 'next/image'
 import Link from 'next/link'

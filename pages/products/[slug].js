@@ -1,3 +1,4 @@
+import Head from 'next/head'
 import { ProductSummary, ProductDescription } from '../../components'
 import prisma from '../../prisma'
 import { formatCurrency } from '../../util'
@@ -5,6 +6,9 @@ import { formatCurrency } from '../../util'
 export default function Product({ product }) {
     return (
         <>
+            <Head>
+                <title>{product.name} | Wein Guys</title>
+            </Head>
             <ProductSummary product={product} />
             <ProductDescription product={product} />
         </>

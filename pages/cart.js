@@ -1,3 +1,12 @@
+import Head from 'next/head'
+
 export default function Cart() {
-    return <h1>Cart</h1>
+    return (
+        <>
+            <Head>
+                <title>Cart | Wein Guys</title>
+            </Head>
+            <h1>Cart</h1>
+        </>
+    )
 }

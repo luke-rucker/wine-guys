@@ -1,3 +1,12 @@
+import Head from 'next/head'
+
 export default function Privacy() {
-    return <h1>Privacy</h1>
+    return (
+        <>
+            <Head>
+                <title>Privacy | Wein Guys</title>
+            </Head>
+            <h1>Privacy</h1>
+        </>
+    )
 }

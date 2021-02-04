@@ -9,7 +9,7 @@ export default function Store({ products }) {
             <Head>
                 <title>Store | Wein Guys</title>
             </Head>
-            <Logo />
+            <Logo style={{ display: 'block' }} />
             <ProductList products={products} />
         </>
     )

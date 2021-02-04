@@ -72,10 +72,8 @@ export default function Footer() {
                     </Grid.Row>
                     <Grid.Row>
                         <Grid.Column width={16} style={{ textAlign: 'center' }}>
-                            {'Copyright © '}
-                            <Link href="https://weinguys.com">
-                                Wein Guys
-                            </Link>{' '}
+                            Copyright &copy;{' '}
+                            <Link href="https://weinguys.com">Wein Guys</Link>{' '}
                             {new Date().getFullYear()}
                             {'.'}
                         </Grid.Column>
