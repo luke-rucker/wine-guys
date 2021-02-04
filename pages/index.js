@@ -1,5 +1,4 @@
 import Head from 'next/head'
-import { Container } from 'semantic-ui-react'
 import { Logo, ProductList } from '../components'
 import prisma from '../prisma'
 import { formatCurrency } from '../util'
@@ -10,10 +9,8 @@ export default function Store({ products }) {
             <Head>
                 <title>Store | Wein Guys</title>
             </Head>
-            <Container text>
-                <Logo />
-                <ProductList products={products} />
-            </Container>
+            <Logo />
+            <ProductList products={products} />
         </>
     )
 }

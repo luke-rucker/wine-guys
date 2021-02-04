@@ -10,7 +10,7 @@ generator client {
 
 model Product {
     id          Int    @id @default(autoincrement())
-    slug        String
+    slug        String @unique
     name        String
     price       Float
     description String
