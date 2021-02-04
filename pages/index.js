@@ -1,7 +1,12 @@
 import Head from 'next/head'
+import dynamic from 'next/dynamic'
 import { Logo, ProductList } from '../components'
 import prisma from '../prisma'
 import { formatCurrency } from '../util'
+
+const DeliveryTerms = dynamic(() => import('../components/delivery-terms'), {
+    ssr: false,
+})
 
 export default function Store({ products }) {
     return (
@@ -9,7 +14,8 @@ export default function Store({ products }) {
             <Head>
                 <title>Store | Wein Guys</title>
             </Head>
-            <Logo style={{ display: 'block' }} />
+            <Logo />
+            <DeliveryTerms />
             <ProductList products={products} />
         </>
     )
