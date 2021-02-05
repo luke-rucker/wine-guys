@@ -1,5 +1,7 @@
 import Head from 'next/head'
 import dynamic from 'next/dynamic'
+import { useRouter } from 'next/router'
+import { Loader } from 'semantic-ui-react'
 import { Logo, ProductList } from '../components'
 import prisma from '../prisma'
 import { formatCurrency } from '../util'
@@ -9,13 +11,19 @@ const DeliveryTerms = dynamic(() => import('../components/delivery-terms'), {
 })
 
 export default function Store({ products }) {
+    const router = useRouter()
+
+    if (router.isFallback) {
+        return <Loader active inline="centered" />
+    }
+
     return (
         <>
             <Head>
                 <title>Store | Wein Guys</title>
             </Head>
-            <Logo />
             <DeliveryTerms />
+            <Logo />
             <ProductList products={products} />
         </>
     )

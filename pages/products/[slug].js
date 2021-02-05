@@ -1,9 +1,17 @@
 import Head from 'next/head'
+import { useRouter } from 'next/router'
+import { Loader } from 'semantic-ui-react'
 import { ProductSummary, ProductDescription } from '../../components'
 import prisma from '../../prisma'
 import { formatCurrency } from '../../util'
 
 export default function Product({ product }) {
+    const router = useRouter()
+
+    if (router.isFallback) {
+        return <Loader active inline="centered" />
+    }
+
     return (
         <>
             <Head>
