@@ -12,7 +12,7 @@ export default function Navbar() {
         <Menu size="huge" borderless pointing>
             <Container text>
                 <Link href="/">
-                    <Menu.Item active={router.pathname === '/'} header>
+                    <Menu.Item active={router.pathname === '/'}>
                         <Image src="/icon.svg" alt="icon" size="mini" />
                         Store
                     </Menu.Item>

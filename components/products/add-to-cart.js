@@ -39,7 +39,7 @@ export default function AddToCart({ product }) {
             <Input
                 type="number"
                 pattern="[0-9]*"
-                inputmode="numeric"
+                inputMode="numeric"
                 placeholder="Quantity"
                 value={quantity}
                 min={1}
