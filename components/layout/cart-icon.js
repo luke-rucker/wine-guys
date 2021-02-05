@@ -7,7 +7,7 @@ export default function CartIcon() {
     return (
         <>
             <Icon name="cart" />
-            Cart {cart.items.length >= 9 ? '9+' : `(${cart.items.length})`}
+            Cart {cart.itemCount() >= 9 ? '9+' : `(${cart.itemCount()})`}
         </>
     )
 }

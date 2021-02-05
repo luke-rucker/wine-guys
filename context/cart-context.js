@@ -1,4 +1,5 @@
 import React from 'react'
+import isEqual from 'lodash.isequal'
 
 const CartContext = React.createContext()
 
@@ -9,24 +10,54 @@ function CartProvider({ children }) {
         cartItems ? JSON.parse(cartItems) : []
     )
 
-    function addItem(item, quantity = 1) {
-        const itemsToAdd = []
-        for (let i = 0; i < quantity; i++) {
-            itemsToAdd.push(item)
+    React.useEffect(
+        () => localStorage.setItem('cartItems', JSON.stringify(items)),
+        [items]
+    )
+
+    function addProduct(product, quantity = 1) {
+        const existingItemIndex = items.findIndex(item =>
+            isEqual(item.product, product)
+        )
+
+        let newItems
+
+        // Product not already in cart
+        if (existingItemIndex === -1) {
+            newItems = [...items, { product, quantity }]
+        } else {
+            const { [existingItemIndex]: existingItem } = items
+            existingItem.quantity += quantity
+
+            newItems = [
+                ...items.filter(item => !isEqual(item.product, product)),
+                { ...existingItem },
+            ]
         }
-        const newItems = items.concat(itemsToAdd)
+
         setItems(newItems)
-        localStorage.setItem('cartItems', JSON.stringify(newItems))
     }
 
-    function removeItem(index) {
-        const newItems = items.splice(index, 1)
-        setCart(newItems)
-        localStorage.setItem('cartItems', JSON.stringify(newItems))
+    function removeItem(item) {
+        const newItems = items.filter(i => !isEqual(i, item))
+        setItems(newItems)
+    }
+
+    function itemCount() {
+        return items.reduce((acc, item) => acc + parseInt(item.quantity), 0)
+    }
+
+    function total() {
+        return items.reduce(
+            (acc, item) => acc + item.quantity * item.product.price,
+            0
+        )
     }
 
     return (
-        <CartContext.Provider value={{ items, addItem, removeItem }}>
+        <CartContext.Provider
+            value={{ items, addProduct, removeItem, itemCount, total }}
+        >
             {children}
         </CartContext.Provider>
     )

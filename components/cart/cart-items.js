@@ -1,17 +1,55 @@
+import Link from 'next/link'
+import { Item, Button, Message } from 'semantic-ui-react'
 import { useCart } from '../../context/cart-context'
 
 export default function CartItems() {
     const cart = useCart()
 
     if (cart.items.length === 0) {
-        return <p>No items are in your cart.</p>
+        return (
+            <Message warning>
+                <Message.Header>Your cart is empty</Message.Header>
+                <p>
+                    You will need to add some items to the cart before you can
+                    checkout.
+                </p>
+            </Message>
+        )
     }
 
     return (
-        <ul>
+        <Item.Group divided>
             {cart.items.map((item, index) => (
-                <li key={index}>{item.name}</li>
+                <CartItem item={item} key={index} />
             ))}
-        </ul>
+        </Item.Group>
+    )
+}
+
+function CartItem({ item }) {
+    const cart = useCart()
+    const { product } = item
+
+    return (
+        <Item>
+            <Item.Image
+                src={product.imageUrl}
+                alt={product.name}
+                size="small"
+                style={{ background: '#f2f2f2' }}
+            />
+            <Item.Header>
+                <Link href={`/products/${product.slug}/`}>{product.name}</Link>
+            </Item.Header>
+            <Item.Meta>{`${item.quantity}x${product.formattedPrice}`}</Item.Meta>
+            <Item.Extra>
+                <Button
+                    basic
+                    icon="remove"
+                    floated="right"
+                    onClick={() => cart.removeItem(item)}
+                />
+            </Item.Extra>
+        </Item>
     )
 }

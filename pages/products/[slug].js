@@ -39,5 +39,5 @@ export async function getStaticProps({ params }) {
 
     product.formattedPrice = formatCurrency(product.price)
 
-    return { props: { product } }
+    return { props: { product }, revalidate: 5 }
 }

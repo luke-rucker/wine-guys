@@ -22,7 +22,9 @@ export default function Store({ products }) {
 }
 
 export async function getStaticProps() {
-    const products = await prisma.product.findMany()
+    const products = await prisma.product.findMany({
+        orderBy: { price: 'desc' },
+    })
 
     products.forEach(
         product => (product.formattedPrice = formatCurrency(product.price))
@@ -32,5 +34,6 @@ export async function getStaticProps() {
         props: {
             products,
         },
+        revalidate: 5,
     }
 }

@@ -28,7 +28,7 @@ export default function AddToCart({ product }) {
         setError(error)
 
         if (!error) {
-            cart.addItem(product, quantity)
+            cart.addProduct(product, quantity)
             setVisible(true)
             setTimeout(() => setVisible(false), 1000)
         }
