@@ -23,6 +23,7 @@ export default function Store({ products }) {
 
 export async function getStaticProps() {
     const products = await prisma.product.findMany()
+
     products.forEach(
         product => (product.formattedPrice = formatCurrency(product.price))
     )

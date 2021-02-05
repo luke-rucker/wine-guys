@@ -1,6 +1,6 @@
 import dynamic from 'next/dynamic'
-import { Layout } from '../components'
 import 'semantic-ui-css/semantic.min.css'
+import { Layout } from '../components'
 
 const CartProvider = dynamic(
     () =>
