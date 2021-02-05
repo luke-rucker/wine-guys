@@ -5,14 +5,18 @@ const CartItems = dynamic(() => import('../components/cart/cart-items'), {
     ssr: false,
 })
 
+const CartSummary = dynamic(() => import('../components/cart/cart-summary'), {
+    ssr: false,
+})
+
 export default function Cart() {
     return (
         <>
             <Head>
                 <title>Cart | Wein Guys</title>
             </Head>
-            <h1>Cart</h1>
             <CartItems />
+            <CartSummary />
         </>
     )
 }
