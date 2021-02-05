@@ -36,20 +36,25 @@ function CartItem({ item }) {
                 src={product.imageUrl}
                 alt={product.name}
                 size="small"
-                style={{ background: '#f2f2f2' }}
+                // style={{ background: '#f2f2f2' }}
             />
-            <Item.Header>
-                <Link href={`/products/${product.slug}/`}>{product.name}</Link>
-            </Item.Header>
-            <Item.Meta>{`${item.quantity}x${product.formattedPrice}`}</Item.Meta>
-            <Item.Extra>
-                <Button
-                    basic
-                    icon="remove"
-                    floated="right"
-                    onClick={() => cart.removeItem(item)}
-                />
-            </Item.Extra>
+            <Item.Content>
+                <Item.Header>
+                    <Link href={`/products/${product.slug}/`}>
+                        {product.name}
+                    </Link>
+                </Item.Header>
+                <Item.Meta>{`${item.quantity}x${product.formattedPrice}`}</Item.Meta>
+                <Item.Description>{product.description}</Item.Description>
+                <Item.Extra>
+                    <Button
+                        basic
+                        icon="remove"
+                        floated="right"
+                        onClick={() => cart.removeItem(item)}
+                    />
+                </Item.Extra>
+            </Item.Content>
         </Item>
     )
 }

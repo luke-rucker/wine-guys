@@ -27,7 +27,7 @@ function CartProvider({ children }) {
             newItems = [...items, { product, quantity }]
         } else {
             const { [existingItemIndex]: existingItem } = items
-            existingItem.quantity += quantity
+            existingItem.quantity += parseInt(quantity)
 
             newItems = [
                 ...items.filter(item => !isEqual(item.product, product)),
