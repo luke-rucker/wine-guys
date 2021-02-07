@@ -9,8 +9,8 @@ generator client {
 }
 
 model Product {
-    id            Int      @id @default(autoincrement())
-    slug          String   @unique
+    id            Int        @id @default(autoincrement())
+    slug          String     @unique
     name          String
     description   String
     itemsIncluded String[]
@@ -20,4 +20,34 @@ model Product {
     isGift        Boolean?
     hasWine       Boolean?
     hasMessage    Boolean?
+    LineItem      LineItem[]
+}
+
+enum PaymentMethod {
+    CASH
+    PAYPAL
+}
+
+model Order {
+    id              Int           @id @default(autoincrement())
+    lineItems       LineItem[]
+    total           Float
+    paymentMethod   PaymentMethod
+    paymentRecieved DateTime?
+    created         DateTime      @default(now())
+    contact         Json
+    isGift          Boolean?
+    deliveryInfo    Json
+    delivered       DateTime?
+}
+
+model LineItem {
+    id                 Int     @id @default(autoincrement())
+    orderId            Int
+    Order              Order   @relation(fields: [orderId], references: [id])
+    productId          Int
+    product            Product @relation(fields: [productId], references: [id])
+    quantity           Int
+    productPriceAtSale Float
+    customization      Json?
 }

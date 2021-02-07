@@ -1,58 +1,28 @@
 import React from 'react'
-import Head from 'next/head'
 import dynamic from 'next/dynamic'
-import { useRouter } from 'next/router'
-import { Divider, Button, Loader } from 'semantic-ui-react'
-import { Formik } from 'formik'
-import { Form } from 'formik-semantic-ui-react'
-import { CheckoutContactForm } from '../components'
+import Head from 'next/Head'
+import { Loader } from 'semantic-ui-react'
 import prisma from '../prisma'
+import ThankYou from '../components/checkout/thank-you'
 
-const DeliveryInfoForm = dynamic(
-    () => import('../components/checkout/delivery-info-form'),
-    { ssr: false, loading: () => <Loader active inline="centered" /> }
-)
-
-const PaymentOptions = dynamic(
-    () => import('../components/checkout/payment-options'),
-    { ssr: false, loading: () => <Loader active inline="centered" /> }
-)
+const CheckoutForm = dynamic(() => import('../components/checkout'), {
+    ssr: false,
+    loading: () => <Loader active inline="centered" />,
+})
 
 export default function Checkout({ giftIds }) {
-    const router = useRouter()
-
-    React.useEffect(() => router.prefetch('/cart'), [])
+    const [success, setSuccess] = React.useState(false)
 
     return (
         <>
             <Head>
                 <title>Checkout | Wein Guys</title>
             </Head>
-            <Button
-                labelPosition="left"
-                icon="left chevron"
-                content="Back to your cart"
-                onClick={() => router.push('/cart')}
-            />
-            <Divider />
-            <Formik
-                initialValues={{
-                    firstName: '',
-                    lastName: '',
-                    email: '',
-                    phoneNumber: '',
-                    isGift: false,
-                }}
-                onSubmit={values => console.log(JSON.stringify(values))}
-            >
-                <Form>
-                    <CheckoutContactForm />
-                    <Divider />
-                    <DeliveryInfoForm giftIds={giftIds} />
-                    <Divider />
-                    <PaymentOptions />
-                </Form>
-            </Formik>
+            {success ? (
+                <ThankYou />
+            ) : (
+                <CheckoutForm giftIds={giftIds} setSuccess={setSuccess} />
+            )}
         </>
     )
 }

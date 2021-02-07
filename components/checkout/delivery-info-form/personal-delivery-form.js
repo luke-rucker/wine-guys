@@ -1,7 +1,7 @@
 import { useFormikContext } from 'formik'
 import { Select, Input } from 'formik-semantic-ui-react'
 import { Form } from 'semantic-ui-react'
-import { makeSelectOptions } from '../../util'
+import { makeSelectOptions } from '../../../util'
 
 const colleges = makeSelectOptions([
     'Krupp',
@@ -19,7 +19,9 @@ const blocks = {
 
 export default function PersonalDeliveryForm() {
     const {
-        values: { college },
+        values: {
+            personalDelivery: { college },
+        },
     } = useFormikContext()
 
     return (
@@ -29,9 +31,13 @@ export default function PersonalDeliveryForm() {
                 and we will deliver it to you at no extra cost.
             </p>
             <Form.Group widths="equal">
-                <Select name="college" label="College" options={colleges} />
                 <Select
-                    name="block"
+                    name="personalDelivery.college"
+                    label="College"
+                    options={colleges}
+                />
+                <Select
+                    name="personalDelivery.block"
                     label="Block"
                     options={
                         blocks[college] || [{ key: '-', value: '-', text: '-' }]
@@ -39,15 +45,18 @@ export default function PersonalDeliveryForm() {
                 />
             </Form.Group>
             <Input
-                name="roomNumber"
+                name="personalDelivery.roomNumber"
                 label="Room Number"
                 placeholder="Room Number"
                 errorPrompt
-                validate={value =>
-                    !/[0-5][0-9][0-9]$/.test(value) || value.length !== 3
-                        ? 'Enter a valid room number.'
-                        : ''
-                }
+                validate={value => {
+                    if (!value) {
+                        return 'Enter a Room Number.'
+                    }
+                    if (!/[0-6][0-9][0-9]$/.test(value) || value.length !== 3) {
+                        return 'Enter a valid room number.'
+                    }
+                }}
             />
         </>
     )
