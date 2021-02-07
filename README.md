@@ -1,10 +1,13 @@
-## Wein Guys
+# Wein Guys
 
-Storefront for Wein Guys - a wine delivery business I cofounded at Jacobs University Bremen.
+![](./public/logo.svg)
 
-Tech Stack:
+## About
 
--   Next.js
--   Semantic UI React
--   Prisma
--   Postgres
+Storefront and (soon) admin site for [Wein Guys](https://weinguys.com). 
+
+## Stack:
+
+-   Next.js for SSG/SSR goodness
+-   Semantic UI React for pretty
+-   Prisma/Postgres for data
