@@ -17,6 +17,7 @@ model Product {
     imageUrl      String
     price         Float
     maxPerOrder   Int?
+    isGift        Boolean?
     hasWine       Boolean?
     hasMessage    Boolean?
 }

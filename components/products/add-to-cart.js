@@ -3,6 +3,7 @@ import { Formik } from 'formik'
 import { Form, Select, TextArea, SubmitButton } from 'formik-semantic-ui-react'
 import { Icon, Transition } from 'semantic-ui-react'
 import { useCart } from '../../context/cart-context'
+import { makeSelectOptions } from '../../util'
 
 // TODO: make this solution way less ugly lol
 export default function AddToCart({ product }) {
@@ -30,40 +31,34 @@ export default function AddToCart({ product }) {
     }
 
     return (
-        <div>
-            <Formik initialValues={initalValues} onSubmit={handleSubmit}>
-                <Form>
-                    {product.hasWine && <WineSelection />}
-                    {product.hasMessage && <MessageField />}
-                    <QuantityField product={product} />
-                    <SubmitButton
-                        style={{ backgroundColor: '#8d1111', color: '#fff' }}
-                        loading={false}
-                    >
-                        <Icon name="plus cart" />
-                        Add to cart
-                    </SubmitButton>
-                    <Transition
-                        duration={{ hide: 1000, show: 1000 }}
-                        visible={messageVisible}
-                    >
-                        <div style={{ color: 'green', position: 'absolute' }}>
-                            <Icon name="check" />
-                            Added to cart
-                        </div>
-                    </Transition>
-                </Form>
-            </Formik>
-        </div>
+        <Formik initialValues={initalValues} onSubmit={handleSubmit}>
+            <Form>
+                {product.hasWine && <WineSelection />}
+                {product.hasMessage && <MessageField />}
+                <QuantityField product={product} />
+                <SubmitButton
+                    style={{ backgroundColor: '#8d1111', color: '#fff' }}
+                    loading={false}
+                >
+                    <Icon name="plus cart" />
+                    Add to cart
+                </SubmitButton>
+                <Transition
+                    duration={{ hide: 1000, show: 1000 }}
+                    visible={messageVisible}
+                >
+                    <div style={{ color: 'green', position: 'absolute' }}>
+                        <Icon name="check" />
+                        Added to cart
+                    </div>
+                </Transition>
+            </Form>
+        </Formik>
     )
 }
 
 function WineSelection() {
-    const wines = [
-        { key: 'red', value: 'Red', text: 'Red' },
-        { key: 'white', value: 'White', text: 'White' },
-        { key: 'rosé', value: 'Rosé', text: 'Rosé' },
-    ]
+    const wines = makeSelectOptions(['Red', 'White', 'Rosé'])
 
     return <Select name="wine" label="Wine" options={wines} />
 }
@@ -106,7 +101,6 @@ function QuantityField({ product }) {
             const quantityInCart = itemInCart ? itemInCart.quantity : 0
 
             if (quantityInCart + parseInt(value) > product.maxPerOrder) {
-                console.log('success')
                 return `Only ${product.maxPerOrder} ${product.name}'s are allowed per order.`
             }
         }
