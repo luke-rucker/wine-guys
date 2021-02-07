@@ -15,27 +15,23 @@ function CartProvider({ children }) {
         [items]
     )
 
+    function getItem(product) {
+        const index = items.findIndex(item => isEqual(item.product, product))
+        return index !== -1 ? items[index] : null
+    }
+
     function addProduct(product, quantity = 1) {
-        const existingItemIndex = items.findIndex(item =>
-            isEqual(item.product, product)
-        )
+        const itemAlreadyInCart = getItem(product)
 
-        let newItems
-
-        // Product not already in cart
-        if (existingItemIndex === -1) {
-            newItems = [...items, { product, quantity }]
+        if (!itemAlreadyInCart) {
+            setItems([...items, { product, quantity }])
         } else {
-            const { [existingItemIndex]: existingItem } = items
-            existingItem.quantity += parseInt(quantity)
-
-            newItems = [
+            itemAlreadyInCart.quantity += quantity
+            setItems([
                 ...items.filter(item => !isEqual(item.product, product)),
-                { ...existingItem },
-            ]
+                { ...itemAlreadyInCart },
+            ])
         }
-
-        setItems(newItems)
     }
 
     function removeItem(item) {
@@ -56,7 +52,7 @@ function CartProvider({ children }) {
 
     return (
         <CartContext.Provider
-            value={{ items, addProduct, removeItem, itemCount, total }}
+            value={{ items, getItem, addProduct, removeItem, itemCount, total }}
         >
             {children}
         </CartContext.Provider>

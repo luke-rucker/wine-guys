@@ -31,12 +31,15 @@ function CartItem({ item }) {
     const { product } = item
 
     return (
-        <Item>
+        <Item
+            style={{
+                overflowWrap: 'break-word',
+            }}
+        >
             <Item.Image
                 src={product.imageUrl}
                 alt={product.name}
                 size="small"
-                // style={{ background: '#f2f2f2' }}
             />
             <Item.Content>
                 <Item.Header>
@@ -44,8 +47,22 @@ function CartItem({ item }) {
                         {product.name}
                     </Link>
                 </Item.Header>
-                <Item.Meta>{`${item.quantity}x${product.formattedPrice}`}</Item.Meta>
-                <Item.Description>{product.description}</Item.Description>
+                <Item.Meta>{`${item.quantity} x ${product.formattedPrice}`}</Item.Meta>
+                <Item.Description>
+                    {item.product.customization &&
+                        Object.entries(item.product.customization).map(
+                            customization => {
+                                const [name, value] = customization
+                                return (
+                                    <p key={name}>
+                                        {name.charAt(0).toUpperCase() +
+                                            name.slice(1)}
+                                        : {value.length >= 26 && <br />} {value}
+                                    </p>
+                                )
+                            }
+                        )}
+                </Item.Description>
                 <Item.Extra>
                     <Button
                         basic

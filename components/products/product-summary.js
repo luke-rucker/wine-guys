@@ -12,7 +12,7 @@ export default function ProductSummary({ product }) {
                     src={product.imageUrl}
                     alt={product.name}
                 />
-                <Item.Content>
+                <Item.Content style={{ width: '100%' }}>
                     <Item.Header>{product.name}</Item.Header>
                     <Item.Description>
                         <p>{product.formattedPrice}</p>

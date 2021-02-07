@@ -13,7 +13,11 @@ export default function CartSummary() {
                     <strong>Total:</strong>
                     {` ${formatCurrency(cart.total())}`}
                 </span>
-                <Button color="black" floated="right">
+                <Button
+                    color="black"
+                    floated="right"
+                    disabled={cart.itemCount() === 0}
+                >
                     Check out
                 </Button>
             </Segment>
