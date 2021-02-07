@@ -5,16 +5,11 @@ import { useRouter } from 'next/router'
 import { Divider, Button, Loader } from 'semantic-ui-react'
 import { Formik } from 'formik'
 import { Form } from 'formik-semantic-ui-react'
-import { CheckoutContactForm } from '../components'
+import { CheckoutContactForm, PaymentOptions } from '../components'
 import prisma from '../prisma'
 
 const DeliveryInfoForm = dynamic(
     () => import('../components/checkout/delivery-info-form'),
-    { ssr: false, loading: () => <Loader active inline="centered" /> }
-)
-
-const PaymentOptions = dynamic(
-    () => import('../components/checkout/payment-options'),
     { ssr: false, loading: () => <Loader active inline="centered" /> }
 )
 
@@ -37,11 +32,24 @@ export default function Checkout({ giftIds }) {
             <Divider />
             <Formik
                 initialValues={{
-                    firstName: '',
-                    lastName: '',
-                    email: '',
-                    phoneNumber: '',
+                    contact: {
+                        firstName: '',
+                        lastName: '',
+                        email: '',
+                        phoneNumber: '',
+                    },
                     isGift: false,
+                    personalDelivery: {
+                        college: 'Krupp',
+                        block: 'A',
+                        roomNumber: '',
+                    },
+                    giftRecipient: {
+                        firstName: '',
+                        lastName: '',
+                        email: '',
+                        phoneNumber: '',
+                    },
                 }}
                 onSubmit={values => console.log(JSON.stringify(values))}
             >

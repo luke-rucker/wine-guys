@@ -1,5 +1,11 @@
 import { Form } from 'semantic-ui-react'
 import { Input } from 'formik-semantic-ui-react'
+import {
+    validateFirstName,
+    validateLastName,
+    validateEmail,
+    validatePhoneNumber,
+} from '../contact-form'
 
 export default function GiftInfoForm() {
     return (
@@ -11,21 +17,33 @@ export default function GiftInfoForm() {
             <h4>Gift Recipient</h4>
             <Form.Group widths="equal">
                 <Input
-                    name="recipientFirstName"
+                    name="giftRecipient.firstName"
                     label="First Name"
                     placeholder="First Name"
+                    errorPrompt
+                    validate={validateFirstName}
                 />
                 <Input
-                    name="recipientLastName"
+                    name="giftRecipient.lastName"
                     label="Last Name"
                     placeholder="Last Name"
+                    errorPrompt
+                    validate={validateLastName}
                 />
             </Form.Group>
-            <Input name="recipientEmail" label="Email" placeholder="Email" />
             <Input
-                name="recipientPhoneNumber"
+                name="giftRecipient.email"
+                label="Email"
+                placeholder="Email"
+                errorPrompt
+                validate={validateEmail}
+            />
+            <Input
+                name="giftRecipient.phoneNumber"
                 label="Phone Number"
                 placeholder="Phone Number"
+                errorPrompt
+                validate={validatePhoneNumber}
             />
         </>
     )
