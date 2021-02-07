@@ -30,31 +30,29 @@ export default function AddToCart({ product }) {
     }
 
     return (
-        <div>
-            <Formik initialValues={initalValues} onSubmit={handleSubmit}>
-                <Form>
-                    {product.hasWine && <WineSelection />}
-                    {product.hasMessage && <MessageField />}
-                    <QuantityField product={product} />
-                    <SubmitButton
-                        style={{ backgroundColor: '#8d1111', color: '#fff' }}
-                        loading={false}
-                    >
-                        <Icon name="plus cart" />
-                        Add to cart
-                    </SubmitButton>
-                    <Transition
-                        duration={{ hide: 1000, show: 1000 }}
-                        visible={messageVisible}
-                    >
-                        <div style={{ color: 'green', position: 'absolute' }}>
-                            <Icon name="check" />
-                            Added to cart
-                        </div>
-                    </Transition>
-                </Form>
-            </Formik>
-        </div>
+        <Formik initialValues={initalValues} onSubmit={handleSubmit}>
+            <Form>
+                {product.hasWine && <WineSelection />}
+                {product.hasMessage && <MessageField />}
+                <QuantityField product={product} />
+                <SubmitButton
+                    style={{ backgroundColor: '#8d1111', color: '#fff' }}
+                    loading={false}
+                >
+                    <Icon name="plus cart" />
+                    Add to cart
+                </SubmitButton>
+                <Transition
+                    duration={{ hide: 1000, show: 1000 }}
+                    visible={messageVisible}
+                >
+                    <div style={{ color: 'green', position: 'absolute' }}>
+                        <Icon name="check" />
+                        Added to cart
+                    </div>
+                </Transition>
+            </Form>
+        </Formik>
     )
 }
 
@@ -106,7 +104,6 @@ function QuantityField({ product }) {
             const quantityInCart = itemInCart ? itemInCart.quantity : 0
 
             if (quantityInCart + parseInt(value) > product.maxPerOrder) {
-                console.log('success')
                 return `Only ${product.maxPerOrder} ${product.name}'s are allowed per order.`
             }
         }
