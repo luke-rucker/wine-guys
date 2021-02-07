@@ -49,22 +49,23 @@ function CartItem({ item }) {
                 </Item.Header>
                 <Item.Meta>{`${item.quantity} x ${product.formattedPrice}`}</Item.Meta>
                 <Item.Description>
-                    {item.product.customization &&
-                        Object.entries(item.product.customization).map(
-                            customization => {
-                                const [name, value] = customization
-                                return (
-                                    <span key={name}>
-                                        <strong>
-                                            {name.charAt(0).toUpperCase() +
-                                                name.slice(1)}
-                                        </strong>
-                                        {': '}
-                                        {value.length >= 26 && <br />} {value}
-                                    </span>
-                                )
-                            }
-                        )}
+                    {item.product.customization
+                        ? Object.entries(item.product.customization).map(
+                              customization => {
+                                  const [name, value] = customization
+                                  return (
+                                      <span key={name}>
+                                          <strong>
+                                              {name.charAt(0).toUpperCase() +
+                                                  name.slice(1)}
+                                          </strong>
+                                          {': '}
+                                          {value.length >= 26 && <br />} {value}
+                                      </span>
+                                  )
+                              }
+                          )
+                        : item.product.description}
                 </Item.Description>
                 <Item.Extra>
                     <Button
