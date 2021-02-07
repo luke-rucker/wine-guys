@@ -1,6 +1,6 @@
 import React from 'react'
 import dynamic from 'next/dynamic'
-import Head from 'next/Head'
+import Head from 'next/head'
 import { Loader } from 'semantic-ui-react'
 import prisma from '../prisma'
 import ThankYou from '../components/checkout/thank-you'
