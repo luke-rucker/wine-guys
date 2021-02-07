@@ -1,27 +1,24 @@
 import React from 'react'
-import Head from 'next/head'
-import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
-import { Divider, Button, Loader } from 'semantic-ui-react'
 import { Formik } from 'formik'
 import { Form } from 'formik-semantic-ui-react'
-import { CheckoutContactForm } from '../../components'
-import prisma from '../../prisma'
+import { Button, Divider } from 'semantic-ui-react'
+import { useCart } from '../../context/cart-context'
+import ContactForm from './contact-form'
+import DeliveryInfoForm from './delivery-info-form'
+import PaymentOptions from './payment-options'
 
-const DeliveryInfoForm = dynamic(
-    () => import('../../components/checkout/delivery-info-form'),
-    { ssr: false, loading: () => <Loader active inline="centered" /> }
-)
-
-const PaymentOptions = dynamic(
-    () => import('../../components/checkout/payment-options'),
-    { ssr: false, loading: () => <Loader active inline="centered" /> }
-)
-
-export default function Checkout({ giftIds }) {
+export default function CheckoutForm({ giftIds, setSuccess }) {
     const router = useRouter()
+    const cart = useCart()
 
     React.useEffect(() => router.prefetch('/cart'), [])
+
+    React.useEffect(() => {
+        if (cart.itemCount() === 0) {
+            router.push('/cart')
+        }
+    }, [])
 
     const [error, setError] = React.useState('')
 
@@ -43,15 +40,13 @@ export default function Checkout({ giftIds }) {
         if (!response.ok) {
             setError('Could not submit your order.')
         } else {
-            setError('')
+            cart.empty()
+            setSuccess(true)
         }
     }
 
     return (
         <>
-            <Head>
-                <title>Checkout | Wein Guys</title>
-            </Head>
             <Button
                 labelPosition="left"
                 icon="left chevron"
@@ -85,7 +80,7 @@ export default function Checkout({ giftIds }) {
                 onSubmit={handleSubmit}
             >
                 <Form>
-                    <CheckoutContactForm />
+                    <ContactForm />
                     <Divider />
                     <DeliveryInfoForm giftIds={giftIds} />
                     <Divider />
@@ -94,15 +89,4 @@ export default function Checkout({ giftIds }) {
             </Formik>
         </>
     )
-}
-
-export async function getStaticProps() {
-    const gifts = await prisma.product.findMany({
-        where: { isGift: true },
-        select: { id: true },
-    })
-
-    const giftIds = gifts.map(gift => gift.id)
-
-    return { props: { giftIds } }
 }

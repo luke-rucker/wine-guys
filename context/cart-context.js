@@ -39,6 +39,10 @@ function CartProvider({ children }) {
         setItems(newItems)
     }
 
+    function empty() {
+        setItems([])
+    }
+
     function itemCount() {
         return items.reduce((acc, item) => acc + parseInt(item.quantity), 0)
     }
@@ -52,7 +56,15 @@ function CartProvider({ children }) {
 
     return (
         <CartContext.Provider
-            value={{ items, getItem, addProduct, removeItem, itemCount, total }}
+            value={{
+                items,
+                getItem,
+                addProduct,
+                removeItem,
+                empty,
+                itemCount,
+                total,
+            }}
         >
             {children}
         </CartContext.Provider>

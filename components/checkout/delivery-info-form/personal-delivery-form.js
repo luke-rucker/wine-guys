@@ -53,7 +53,7 @@ export default function PersonalDeliveryForm() {
                     if (!value) {
                         return 'Enter a Room Number.'
                     }
-                    if (!/[0-5][0-9][0-9]$/.test(value) || value.length !== 3) {
+                    if (!/[0-6][0-9][0-9]$/.test(value) || value.length !== 3) {
                         return 'Enter a valid room number.'
                     }
                 }}
