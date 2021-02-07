@@ -19,11 +19,6 @@ export function validateEmail(value) {
     if (!value) {
         return 'Enter an Email.'
     }
-
-    const jacobsUniversityEmail = /^[a-zA-Z0-9_.+-]+@(?:(?:[a-zA-Z0-9-]+\.)?[a-zA-Z]+\.)?(jacobs-university)\.de$/
-    if (!jacobsUniversityEmail.test(value)) {
-        return 'Enter a Jacobs University email.'
-    }
     return
 }
 

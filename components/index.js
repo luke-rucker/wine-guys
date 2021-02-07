@@ -6,4 +6,3 @@ export { default as ProductSummary } from './products/product-summary'
 export { default as ProductDescription } from './products/product-description'
 
 export { default as CheckoutContactForm } from './checkout/contact-form'
-export { default as PaymentOptions } from './checkout/payment-options'
