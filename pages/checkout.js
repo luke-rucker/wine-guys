@@ -13,6 +13,11 @@ const DeliveryInfoForm = dynamic(
     { ssr: false, loading: () => <Loader active inline="centered" /> }
 )
 
+const PaymentOptions = dynamic(
+    () => import('../components/checkout/payment-options'),
+    { ssr: false, loading: () => <Loader active inline="centered" /> }
+)
+
 export default function Checkout({ giftIds }) {
     const router = useRouter()
 
@@ -36,12 +41,16 @@ export default function Checkout({ giftIds }) {
                     lastName: '',
                     email: '',
                     phoneNumber: '',
+                    isGift: false,
                 }}
+                onSubmit={values => console.log(JSON.stringify(values))}
             >
                 <Form>
                     <CheckoutContactForm />
                     <Divider />
                     <DeliveryInfoForm giftIds={giftIds} />
+                    <Divider />
+                    <PaymentOptions />
                 </Form>
             </Formik>
         </>

@@ -1,13 +1,16 @@
-import React from 'react'
-import { Checkbox, Segment } from 'semantic-ui-react'
+import { Checkbox } from 'semantic-ui-react'
+import { useFormikContext } from 'formik'
 import GiftDeliveryForm from './gift-delivery-form'
 import PersonalDeliveryForm from './personal-delivery-form'
 import { useCart } from '../../context/cart-context'
 
 export default function DeliveryInfoForm({ giftIds }) {
-    const cart = useCart()
+    const {
+        values: { isGift },
+        setFieldValue,
+    } = useFormikContext()
 
-    const [isGift, setIsGift] = React.useState(false)
+    const cart = useCart()
 
     const cartContainsGift =
         cart.items.filter(item => giftIds.includes(item.product.id)).length > 0
@@ -32,7 +35,7 @@ export default function DeliveryInfoForm({ giftIds }) {
             <h4>Delivery</h4>
             <Checkbox
                 label="This order is a gift."
-                onChange={() => setIsGift(!isGift)}
+                onChange={() => setFieldValue('isGift', !isGift)}
             />
             {isGift ? <GiftDeliveryForm /> : <PersonalDeliveryForm />}
         </>
