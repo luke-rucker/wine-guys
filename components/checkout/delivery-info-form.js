@@ -1,10 +1,10 @@
 import React from 'react'
-import { Checkbox } from 'semantic-ui-react'
-import GiftInfoForm from './gift-info-form'
-import PersonalInfoForm from './personal-info-form'
+import { Checkbox, Segment } from 'semantic-ui-react'
+import GiftDeliveryForm from './gift-delivery-form'
+import PersonalDeliveryForm from './personal-delivery-form'
 import { useCart } from '../../context/cart-context'
 
-export default function CheckoutInfoForm({ giftIds }) {
+export default function DeliveryInfoForm({ giftIds }) {
     const cart = useCart()
 
     const [isGift, setIsGift] = React.useState(false)
@@ -15,24 +15,26 @@ export default function CheckoutInfoForm({ giftIds }) {
     if (cartContainsGift) {
         return (
             <>
+                <h4>Delivery</h4>
+                <p>This order contains item(s) that are gifts.</p>
                 <Checkbox
                     disabled
                     defaultChecked
                     label="This order is a gift."
                 />
-                <p>This order contains item(s) that are gifts.</p>
-                <GiftInfoForm />
+                <GiftDeliveryForm />
             </>
         )
     }
 
     return (
         <>
+            <h4>Delivery</h4>
             <Checkbox
                 label="This order is a gift."
                 onChange={() => setIsGift(!isGift)}
             />
-            {isGift ? <GiftInfoForm /> : <PersonalInfoForm />}
+            {isGift ? <GiftDeliveryForm /> : <PersonalDeliveryForm />}
         </>
     )
 }

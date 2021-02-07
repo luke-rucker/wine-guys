@@ -3,6 +3,7 @@ import { Formik } from 'formik'
 import { Form, Select, TextArea, SubmitButton } from 'formik-semantic-ui-react'
 import { Icon, Transition } from 'semantic-ui-react'
 import { useCart } from '../../context/cart-context'
+import { makeSelectOptions } from '../../util'
 
 // TODO: make this solution way less ugly lol
 export default function AddToCart({ product }) {
@@ -57,11 +58,7 @@ export default function AddToCart({ product }) {
 }
 
 function WineSelection() {
-    const wines = [
-        { key: 'red', value: 'Red', text: 'Red' },
-        { key: 'white', value: 'White', text: 'White' },
-        { key: 'rosé', value: 'Rosé', text: 'Rosé' },
-    ]
+    const wines = makeSelectOptions(['Red', 'White', 'Rosé'])
 
     return <Select name="wine" label="Wine" options={wines} />
 }
