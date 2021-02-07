@@ -2,7 +2,7 @@ import React from 'react'
 import Head from 'next/head'
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
-import { Divider, Button } from 'semantic-ui-react'
+import { Divider, Button, Loader } from 'semantic-ui-react'
 import { Formik } from 'formik'
 import { Form } from 'formik-semantic-ui-react'
 import { CheckoutContactForm } from '../components'
@@ -10,7 +10,7 @@ import prisma from '../prisma'
 
 const DeliveryInfoForm = dynamic(
     () => import('../components/checkout/delivery-info-form'),
-    { ssr: false }
+    { ssr: false, loading: () => <Loader active inline="centered" /> }
 )
 
 export default function Checkout({ giftIds }) {
