@@ -37,7 +37,7 @@ function CartItem({ item }) {
             }}
         >
             <Item.Image
-                src={product.imageUrl}
+                src={`/products/${product.slug}.png`}
                 alt={product.name}
                 size="small"
             />

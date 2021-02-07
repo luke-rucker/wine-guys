@@ -18,7 +18,7 @@ function ProductCard({ product }) {
             <Card link>
                 <SemanticImage>
                     <Image
-                        src={product.imageUrl}
+                        src={`/products/${product.slug}.png`}
                         height={300}
                         width={300}
                         layout="responsive"

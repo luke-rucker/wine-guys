@@ -16,11 +16,9 @@ export default function DeliveryTerms() {
         <Modal size="mini" open={open}>
             <Modal.Header>Delivery Terms</Modal.Header>
             <Modal.Content>
-                <p>
-                    We only accept orders delivered on the campus of Jacobs
-                    University Bremen. If you do not live on campus, your order
-                    will not be delivered.
-                </p>
+                We only accept orders delivered on the campus of Jacobs
+                University Bremen. If you do not live on campus, your order will
+                not be delivered.
             </Modal.Content>
             <Modal.Actions>
                 <Button positive onClick={handleAccept}>

@@ -9,7 +9,7 @@ export default function ProductSummary({ product }) {
             <Item style={{ alignItems: 'center' }}>
                 <Item.Image
                     size="medium"
-                    src={product.imageUrl}
+                    src={`/products/${product.slug}.png`}
                     alt={product.name}
                 />
                 <Item.Content style={{ width: '100%' }}>
