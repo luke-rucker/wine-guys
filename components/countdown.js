@@ -38,11 +38,11 @@ export default function Countdown({ targetDate, header, timesUp }) {
     })
 
     return (
-        <Message style={{ textAlign: 'center' }}>
+        <Message style={{ textAlign: 'center', marginBottom: '2em' }}>
             <Message.Header>{header}</Message.Header>
             {timerComponents.length ? (
                 <>
-                    <span key={'ends in'}>Ends in: </span> {timerComponents}
+                    <span>Ends in: </span> {timerComponents}
                 </>
             ) : (
                 <span>{timesUp}</span>

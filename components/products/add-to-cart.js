@@ -5,7 +5,6 @@ import { Icon, Transition } from 'semantic-ui-react'
 import { useCart } from '../../context/cart-context'
 import { makeSelectOptions } from '../../util'
 
-// TODO: make this code way less ugly lol
 export default function AddToCart({ product }) {
     const cart = useCart()
 
@@ -33,6 +32,7 @@ export default function AddToCart({ product }) {
     return (
         <Formik initialValues={initalValues} onSubmit={handleSubmit}>
             <Form>
+                {/* TODO: make this code way less ugly lol*/}
                 {product.hasWine && <WineSelection />}
                 {product.hasMessage && <MessageField />}
                 <QuantityField product={product} />
