@@ -1,24 +1,25 @@
-import { Icon } from 'semantic-ui-react'
-import { SubmitButton } from 'formik-semantic-ui-react'
+import { Button, Icon } from 'semantic-ui-react'
 import { useFormikContext } from 'formik'
 
-export default function CashPaymentButton() {
+export default function Cash({ loading }) {
     const {
         values: { isGift },
         setFieldValue,
     } = useFormikContext()
 
     return (
-        <SubmitButton
+        <Button
             positive
+            type="submit"
             disabled={isGift}
-            style={{ width: '100%' }}
+            loading={loading}
+            style={{ width: '100%', marginBottom: '1em' }}
             onClick={() => {
                 setFieldValue('paymentMethod', 'CASH', 0)
             }}
         >
             <Icon name="money" />
             Pay with Cash
-        </SubmitButton>
+        </Button>
     )
 }
