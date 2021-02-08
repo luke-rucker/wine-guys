@@ -20,6 +20,9 @@ export default function Footer() {
                                 <Header as="h4" content="About" />
                                 <List>
                                     <List.Item>
+                                        <Link href="/faq">FAQ</Link>
+                                    </List.Item>
+                                    <List.Item>
                                         <Link href="/privacy">Privacy</Link>
                                     </List.Item>
                                     <List.Item>
