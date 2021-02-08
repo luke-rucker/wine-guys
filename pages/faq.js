@@ -41,7 +41,7 @@ export default function Faq({ faqs }) {
 }
 
 export async function getStaticProps() {
-    const faqs = await prisma.faq.findMany()
+    const faqs = await prisma.faq.findMany({ orderBy: { id: 'asc' } })
 
     return { props: { faqs }, revalidate: 5 }
 }
