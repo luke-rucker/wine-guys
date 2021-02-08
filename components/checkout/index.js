@@ -41,8 +41,21 @@ export default function CheckoutForm({ giftIds, setSuccess }) {
             setError('Could not submit your order.')
         } else {
             cart.empty()
+
+            if (values.paymentMethod === 'PAYPAL') {
+                window.open(
+                    `${process.env.NEXT_PUBLIC_PAYPAL_ME}/${calculateTotal()}`,
+                    '_blank'
+                )
+            }
+
             setSuccess(true)
         }
+    }
+
+    function calculateTotal() {
+        const shouldApplyDiscount = new Date() < new Date('2021-02-13T00:00')
+        return shouldApplyDiscount ? cart.total() * 0.9 : cart.total()
     }
 
     return (
@@ -86,7 +99,12 @@ export default function CheckoutForm({ giftIds, setSuccess }) {
                     <Divider />
                     <DeliveryInfoForm giftIds={giftIds} />
                     <Divider />
-                    <PaymentOptions error={error} />
+                    <PaymentOptions
+                        subTotal={cart.total()}
+                        discount={calculateTotal() - cart.total()}
+                        total={calculateTotal()}
+                        error={error}
+                    />
                 </Form>
             </Formik>
         </>

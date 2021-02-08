@@ -3,14 +3,17 @@ import { useFormikContext } from 'formik'
 import { Header, Segment } from 'semantic-ui-react'
 import { useCart } from '../../../context/cart-context'
 import { formatCurrency } from '../../../util'
-import CashPaymentButton from './cash-payment-button'
+import Cash from './cash'
+import Paypal from './paypal'
 
-export default function PaymentOptions({ error }) {
-    const cart = useCart()
+export default function PaymentOptions({ subTotal, discount, total, error }) {
     const {
         values: { paymentMethod },
         setFieldValue,
+        isValidating,
+        isSubmitting,
     } = useFormikContext()
+    const cart = useCart()
 
     React.useEffect(
         () =>
@@ -28,11 +31,7 @@ export default function PaymentOptions({ error }) {
         []
     )
 
-    const shouldApplyDiscount = new Date() < new Date('2021-02-13T00:00')
-
-    function calculateTotal() {
-        return shouldApplyDiscount ? cart.total() * 0.9 : cart.total()
-    }
+    const isLoading = !isValidating && isSubmitting
 
     return (
         <>
@@ -45,19 +44,15 @@ export default function PaymentOptions({ error }) {
                     }}
                 >
                     <tbody>
-                        {shouldApplyDiscount && (
+                        <tr>
+                            <td>Subtotal:</td>
+                            <td>{` ${formatCurrency(subTotal)}`}</td>
+                        </tr>
+                        {discount !== 0 && (
                             <>
                                 <tr>
-                                    <td>Subtotal:</td>
-                                    <td>{` ${formatCurrency(
-                                        cart.total()
-                                    )}`}</td>
-                                </tr>
-                                <tr>
                                     <td>Discount:</td>
-                                    <td>{` ${formatCurrency(
-                                        calculateTotal() - cart.total()
-                                    )}`}</td>
+                                    <td>{` ${formatCurrency(discount)}`}</td>
                                 </tr>
                             </>
                         )}
@@ -65,12 +60,16 @@ export default function PaymentOptions({ error }) {
                             <td>
                                 <strong>Total:</strong>
                             </td>
-                            <td>{` ${formatCurrency(calculateTotal())}`}</td>
+                            <td>{` ${formatCurrency(total)}`}</td>
                         </tr>
                     </tbody>
                 </table>
-                <CashPaymentButton />
+                <Cash loading={paymentMethod === 'CASH' && isLoading} />
                 {error && paymentMethod === 'CASH' && (
+                    <div style={{ color: 'red' }}>{error}</div>
+                )}
+                <Paypal loading={paymentMethod === 'PAYPAL' && isLoading} />
+                {error && paymentMethod === 'PAYPAL' && (
                     <div style={{ color: 'red' }}>{error}</div>
                 )}
             </Segment>
