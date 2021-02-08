@@ -5,7 +5,7 @@ import { Icon, Transition } from 'semantic-ui-react'
 import { useCart } from '../../context/cart-context'
 import { makeSelectOptions } from '../../util'
 
-// TODO: make this solution way less ugly lol
+// TODO: make this code way less ugly lol
 export default function AddToCart({ product }) {
     const cart = useCart()
 
