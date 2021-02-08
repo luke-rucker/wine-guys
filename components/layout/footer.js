@@ -14,9 +14,9 @@ export default function Footer() {
             <Divider style={{ marginTop: '2em' }} />
             <Segment vertical>
                 <Container text>
-                    <Grid stackable>
+                    <Grid stackable columns="equal">
                         <Grid.Row>
-                            <Grid.Column width={4}>
+                            <Grid.Column>
                                 <Header as="h4" content="About" />
                                 <List>
                                     <List.Item>
@@ -25,12 +25,9 @@ export default function Footer() {
                                     <List.Item>
                                         <Link href="/privacy">Privacy</Link>
                                     </List.Item>
-                                    <List.Item>
-                                        <Link href="/terms">Terms</Link>
-                                    </List.Item>
                                 </List>
                             </Grid.Column>
-                            <Grid.Column width={5}>
+                            <Grid.Column>
                                 <Header as="h4" content="Services" />
                                 <List>
                                     <List.Item>
@@ -38,7 +35,7 @@ export default function Footer() {
                                     </List.Item>
                                 </List>
                             </Grid.Column>
-                            <Grid.Column width={7}>
+                            <Grid.Column>
                                 <Header as="h4">Contact Us</Header>
                                 <p>
                                     It's wine o'clock somewhere! What are you
@@ -57,8 +54,8 @@ export default function Footer() {
                                     <List.Item style={{ display: 'flex' }}>
                                         <List.Icon name="whatsapp" />
                                         <Link
-                                            href="https://whatsapp.com"
-                                            alt="whatsapp link"
+                                            href="/whatsapp"
+                                            alt="whatsapp contact"
                                         >
                                             WhatsApp
                                         </Link>
