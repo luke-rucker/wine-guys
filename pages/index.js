@@ -2,7 +2,7 @@ import Head from 'next/head'
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
 import { Loader } from 'semantic-ui-react'
-import { Logo, ProductList } from '../components'
+import { Logo, ProductList, Countdown } from '../components'
 import prisma from '../prisma'
 import { formatCurrency } from '../util'
 
@@ -24,6 +24,11 @@ export default function Store({ products }) {
             </Head>
             <DeliveryTerms />
             <Logo />
+            <Countdown
+                targetDate={new Date('2021-02-13T00:00:00')}
+                header="10% Discount on all Orders"
+                timesUp="Sale is over."
+            />
             <ProductList products={products} />
         </>
     )
