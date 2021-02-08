@@ -12,12 +12,12 @@ model Product {
     id            Int        @id @default(autoincrement())
     slug          String     @unique
     name          String
+    price         Float
     description   String
     itemsIncluded String[]
-    imageUrl      String
-    price         Float
-    maxPerOrder   Int?
+    notes         String[]
     isGift        Boolean?
+    maxPerOrder   Int?
     hasWine       Boolean?
     hasMessage    Boolean?
     LineItem      LineItem[]
