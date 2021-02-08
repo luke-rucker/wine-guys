@@ -43,9 +43,15 @@ export default function CheckoutForm({ giftIds, setSuccess }) {
             cart.empty()
 
             if (values.paymentMethod === 'PAYPAL') {
-                window.open(
-                    `${process.env.NEXT_PUBLIC_PAYPAL_ME}/${calculateTotal()}`,
-                    '_blank'
+                setTimeout(
+                    () =>
+                        window.open(
+                            `${process.env.NEXT_PUBLIC_PAYPAL_ME}/${
+                                calculateTotal() + cart.depositTotal()
+                            }`,
+                            '_blank'
+                        ),
+                    800
                 )
             }
 
@@ -102,7 +108,8 @@ export default function CheckoutForm({ giftIds, setSuccess }) {
                     <PaymentOptions
                         subTotal={cart.total()}
                         discount={calculateTotal() - cart.total()}
-                        total={calculateTotal()}
+                        deposit={cart.depositTotal()}
+                        total={calculateTotal() + cart.depositTotal()}
                         error={error}
                     />
                 </Form>

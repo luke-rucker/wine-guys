@@ -43,6 +43,7 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }) {
     const product = await prisma.product.findUnique({
         where: { slug: params.slug },
+        include: { deposit: true },
     })
 
     product.formattedPrice = formatCurrency(product.price)

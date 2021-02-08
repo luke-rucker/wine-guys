@@ -54,14 +54,14 @@ function CartItem({ item }) {
                               customization => {
                                   const [name, value] = customization
                                   return (
-                                      <span key={name}>
+                                      <p key={name}>
                                           <strong>
                                               {name.charAt(0).toUpperCase() +
                                                   name.slice(1)}
                                           </strong>
                                           {': '}
                                           {value.length >= 26 && <br />} {value}
-                                      </span>
+                                      </p>
                                   )
                               }
                           )
