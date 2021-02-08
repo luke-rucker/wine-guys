@@ -1,4 +1,5 @@
 import { Header, Divider, List } from 'semantic-ui-react'
+import { formatCurrency } from '../../util'
 
 export default function ProductDescription({ product }) {
     return (
@@ -12,11 +13,22 @@ export default function ProductDescription({ product }) {
                     <List.Item key={index}>{item}</List.Item>
                 ))}
             </List>
-            {product.notes.length > 0 && (
+            {(product.notes.length > 0 || product.deposit) && (
                 <>
                     <Divider />
                     <Header as="h4">Notes</Header>
                     <List bulleted>
+                        {product.deposit && (
+                            <List.Item>
+                                {`Includes an additional ${formatCurrency(
+                                    product.deposit.amount
+                                )} deposit for ${
+                                    product.deposit.name
+                                }, which will be refunded on the return of ${
+                                    product.deposit.name
+                                }`}
+                            </List.Item>
+                        )}
                         {product.notes.map((note, index) => (
                             <List.Item key={index}>{note}</List.Item>
                         ))}

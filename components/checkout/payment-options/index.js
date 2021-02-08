@@ -6,7 +6,13 @@ import { formatCurrency } from '../../../util'
 import Cash from './cash'
 import Paypal from './paypal'
 
-export default function PaymentOptions({ subTotal, discount, total, error }) {
+export default function PaymentOptions({
+    subTotal,
+    discount,
+    deposit,
+    total,
+    error,
+}) {
     const {
         values: { paymentMethod },
         setFieldValue,
@@ -49,12 +55,16 @@ export default function PaymentOptions({ subTotal, discount, total, error }) {
                             <td>{` ${formatCurrency(subTotal)}`}</td>
                         </tr>
                         {discount !== 0 && (
-                            <>
-                                <tr>
-                                    <td>Discount:</td>
-                                    <td>{` ${formatCurrency(discount)}`}</td>
-                                </tr>
-                            </>
+                            <tr>
+                                <td>Discount:</td>
+                                <td>{` ${formatCurrency(discount)}`}</td>
+                            </tr>
+                        )}
+                        {deposit !== 0 && (
+                            <tr>
+                                <td>Deposit:</td>
+                                <td>{` ${formatCurrency(deposit)}`}</td>
+                            </tr>
                         )}
                         <tr>
                             <td>

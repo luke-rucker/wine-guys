@@ -11,7 +11,11 @@ export default async function handler(req, res) {
 
             let total = lineItemsWithPrices.reduce(
                 (acc, lineItem) =>
-                    acc + lineItem.quantity * lineItem.productPriceAtSale,
+                    acc +
+                    lineItem.quantity * lineItem.productPriceAtSale +
+                    lineItem.deposit
+                        ? lineItem.deposit.amount
+                        : 0,
                 0
             )
 
@@ -22,7 +26,15 @@ export default async function handler(req, res) {
 
             await prisma.order.create({
                 data: {
-                    lineItems: { create: lineItemsWithPrices },
+                    lineItems: {
+                        create: lineItemsWithPrices.map(lineItem => {
+                            const { deposit, ...rest } = lineItem
+                            return {
+                                ...rest,
+                                depositId: deposit ? deposit.id : null,
+                            }
+                        }),
+                    },
                     total,
                     ...orderInfo,
                 },
@@ -43,16 +55,18 @@ async function lookupPrices(lineItems) {
                 id: parseInt(lineItem.productId),
             })),
         },
-        select: { id: true, price: true },
+        select: { id: true, price: true, deposit: true },
     })
 
-    return lineItems.map(lineItem => ({
-        ...lineItem,
-        productPriceAtSale:
-            productPrices[
-                productPrices.findIndex(
-                    product => product.id === lineItem.productId
-                )
-            ].price,
-    }))
+    return lineItems.map(lineItem => {
+        return {
+            ...lineItem,
+            productPriceAtSale:
+                productPrices[
+                    productPrices.findIndex(
+                        product => product.id === lineItem.productId
+                    )
+                ].price,
+        }
+    })
 }

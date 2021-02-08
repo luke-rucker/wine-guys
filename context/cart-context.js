@@ -47,6 +47,14 @@ function CartProvider({ children }) {
         return items.reduce((acc, item) => acc + parseInt(item.quantity), 0)
     }
 
+    function depositTotal() {
+        return items.reduce(
+            (acc, item) =>
+                acc + (item.product.deposit ? item.product.deposit.amount : 0),
+            0
+        )
+    }
+
     function total() {
         return items.reduce(
             (acc, item) => acc + item.quantity * item.product.price,
@@ -63,6 +71,7 @@ function CartProvider({ children }) {
                 removeItem,
                 empty,
                 itemCount,
+                depositTotal,
                 total,
             }}
         >

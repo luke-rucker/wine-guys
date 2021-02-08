@@ -13,6 +13,7 @@ model Product {
     slug          String     @unique
     name          String
     price         Float
+    deposit       Deposit?
     description   String
     itemsIncluded String[]
     notes         String[]
@@ -21,6 +22,15 @@ model Product {
     hasWine       Boolean?
     hasMessage    Boolean?
     LineItem      LineItem[]
+}
+
+model Deposit {
+    id        Int        @id @default(autoincrement())
+    productId Int
+    product   Product    @relation(fields: [productId], references: [id])
+    name      String
+    amount    Float
+    LineItem  LineItem[]
 }
 
 enum PaymentMethod {
@@ -42,13 +52,15 @@ model Order {
 }
 
 model LineItem {
-    id                 Int     @id @default(autoincrement())
+    id                 Int      @id @default(autoincrement())
     orderId            Int
-    Order              Order   @relation(fields: [orderId], references: [id])
+    Order              Order    @relation(fields: [orderId], references: [id])
     productId          Int
-    product            Product @relation(fields: [productId], references: [id])
+    product            Product  @relation(fields: [productId], references: [id])
     quantity           Int
     productPriceAtSale Float
+    depositId          Int?
+    deposit            Deposit? @relation(fields: [depositId], references: [id])
     customization      Json?
 }
 
