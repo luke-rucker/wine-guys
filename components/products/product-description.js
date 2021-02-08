@@ -12,6 +12,17 @@ export default function ProductDescription({ product }) {
                     <List.Item key={index}>{item}</List.Item>
                 ))}
             </List>
+            {product.notes.length > 0 && (
+                <>
+                    <Divider />
+                    <Header as="h4">Notes</Header>
+                    <List bulleted>
+                        {product.notes.map((note, index) => (
+                            <List.Item key={index}>{note}</List.Item>
+                        ))}
+                    </List>
+                </>
+            )}
         </>
     )
 }
