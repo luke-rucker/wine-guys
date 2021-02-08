@@ -67,6 +67,8 @@ export default function CheckoutForm({ giftIds, setSuccess }) {
                         college: 'Krupp',
                         block: 'A',
                         roomNumber: '',
+                        date: '2021-02-14',
+                        time: '17:00',
                     },
                     giftRecipient: {
                         firstName: '',

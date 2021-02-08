@@ -58,6 +58,27 @@ export default function PersonalDeliveryForm() {
                     }
                 }}
             />
+            <Form.Group widths="equal">
+                <Input
+                    name="personalDelivery.date"
+                    label="Date"
+                    type="date"
+                    disabled={true}
+                />
+                <Input
+                    name="personalDelivery.time"
+                    label="Delivery Time"
+                    type="time"
+                    step={60 * 15} // 15 min
+                    min="17:00"
+                    max="22:00"
+                />
+            </Form.Group>
+            <p>
+                We are currently only accepting orders delivered on February
+                14th from 5:00pm to 10:00pm. Please allow for a 15 minute
+                discrepancy in actual delivery time.
+            </p>
         </>
     )
 }
