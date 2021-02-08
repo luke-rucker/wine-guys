@@ -1,6 +1,6 @@
 import React from 'react'
-import { Segment } from 'semantic-ui-react'
 import { useFormikContext } from 'formik'
+import { Header, Segment } from 'semantic-ui-react'
 import { useCart } from '../../../context/cart-context'
 import { formatCurrency } from '../../../util'
 import CashPaymentButton from './cash-payment-button'
@@ -28,14 +28,47 @@ export default function PaymentOptions({ error }) {
         []
     )
 
+    const shouldApplyDiscount = new Date() < new Date('2021-02-13T00:00')
+
+    function calculateTotal() {
+        return shouldApplyDiscount ? cart.total() * 0.9 : cart.total()
+    }
+
     return (
         <>
-            <h4>Payment</h4>
-            <Segment size="large">
-                <p style={{ marginBottom: '1em' }}>
-                    <strong>Total:</strong>
-                    {` ${formatCurrency(cart.total())}`}
-                </p>
+            <Header as="h4">Payment</Header>
+            <Segment>
+                <table
+                    style={{
+                        textAlign: 'right',
+                        marginBottom: '1em',
+                    }}
+                >
+                    <tbody>
+                        {shouldApplyDiscount && (
+                            <>
+                                <tr>
+                                    <td>Subtotal:</td>
+                                    <td>{` ${formatCurrency(
+                                        cart.total()
+                                    )}`}</td>
+                                </tr>
+                                <tr>
+                                    <td>Discount:</td>
+                                    <td>{` ${formatCurrency(
+                                        calculateTotal() - cart.total()
+                                    )}`}</td>
+                                </tr>
+                            </>
+                        )}
+                        <tr>
+                            <td>
+                                <strong>Total:</strong>
+                            </td>
+                            <td>{` ${formatCurrency(calculateTotal())}`}</td>
+                        </tr>
+                    </tbody>
+                </table>
                 <CashPaymentButton />
                 {error && paymentMethod === 'CASH' && (
                     <div style={{ color: 'red' }}>{error}</div>
