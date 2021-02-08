@@ -9,11 +9,16 @@ export default async function handler(req, res) {
 
             const lineItemsWithPrices = await lookupPrices(lineItems)
 
-            const total = lineItemsWithPrices.reduce(
+            let total = lineItemsWithPrices.reduce(
                 (acc, lineItem) =>
                     acc + lineItem.quantity * lineItem.productPriceAtSale,
                 0
             )
+
+            // Time crunch solution lol :(
+            if (new Date() < new Date('2021-02-13T00:00')) {
+                total = total * 0.9
+            }
 
             await prisma.order.create({
                 data: {

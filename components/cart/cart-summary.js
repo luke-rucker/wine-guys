@@ -15,7 +15,7 @@ export default function CartSummary() {
             <Divider />
             <Segment clearing size="large">
                 <span>
-                    <strong>Total:</strong>
+                    <strong>Subtotal:</strong>
                     {` ${formatCurrency(cart.total())}`}
                 </span>
                 <Button
