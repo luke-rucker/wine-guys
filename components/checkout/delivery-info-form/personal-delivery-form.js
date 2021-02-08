@@ -13,7 +13,7 @@ const colleges = makeSelectOptions([
 const blocks = {
     Krupp: makeSelectOptions(['A', 'B', 'C', 'D', 'E', 'F']),
     Mercator: makeSelectOptions(['A', 'B', 'C', 'D']),
-    'College 3': makeSelectOptions(['A', 'B', 'C', 'D']),
+    'College 3': makeSelectOptions(['A', 'B', 'C', 'D', 'E']),
     Nordmetall: makeSelectOptions(['A', 'B', 'C', 'D']),
 }
 
