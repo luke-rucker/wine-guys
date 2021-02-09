@@ -76,7 +76,7 @@ export default function PersonalDeliveryForm() {
             </Form.Group>
             <p>
                 We are currently only accepting orders delivered on February
-                14th from 5:00pm to 10:00pm. Please allow for a 15 minute
+                14th from 5:00 PM to 10:00 PM. Please allow for a 15 minute
                 discrepancy in actual delivery time.
             </p>
         </>

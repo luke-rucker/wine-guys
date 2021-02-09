@@ -1,7 +1,7 @@
 import { Button, Icon } from 'semantic-ui-react'
 import { useFormikContext } from 'formik'
 
-export default function Cash({ loading }) {
+export default function Cash({ setError, loading }) {
     const {
         values: { isGift },
         setFieldValue,
@@ -15,6 +15,7 @@ export default function Cash({ loading }) {
             loading={loading}
             style={{ width: '100%', marginBottom: '1em' }}
             onClick={() => {
+                setError('')
                 setFieldValue('paymentMethod', 'CASH', 0)
             }}
         >

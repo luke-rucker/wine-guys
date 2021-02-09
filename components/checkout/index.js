@@ -111,6 +111,7 @@ export default function CheckoutForm({ giftIds, setSuccess }) {
                         deposit={cart.depositTotal()}
                         total={calculateTotal() + cart.depositTotal()}
                         error={error}
+                        setError={setError}
                     />
                 </Form>
             </Formik>
