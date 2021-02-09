@@ -12,6 +12,7 @@ export default function PaymentOptions({
     deposit,
     total,
     error,
+    setError,
 }) {
     const {
         values: { paymentMethod },
@@ -38,6 +39,19 @@ export default function PaymentOptions({
     )
 
     const isLoading = !isValidating && isSubmitting
+
+    const errorMessage =
+        (
+            <div
+                style={{
+                    textAlign: 'center',
+                    color: 'red',
+                    marginBottom: '1em',
+                }}
+            >
+                {error}
+            </div>
+        ) || null
 
     return (
         <>
@@ -74,14 +88,16 @@ export default function PaymentOptions({
                         </tr>
                     </tbody>
                 </table>
-                <Cash loading={paymentMethod === 'CASH' && isLoading} />
-                {error && paymentMethod === 'CASH' && (
-                    <div style={{ color: 'red' }}>{error}</div>
-                )}
-                <Paypal loading={paymentMethod === 'PAYPAL' && isLoading} />
-                {error && paymentMethod === 'PAYPAL' && (
-                    <div style={{ color: 'red' }}>{error}</div>
-                )}
+                <Cash
+                    setError={setError}
+                    loading={paymentMethod === 'CASH' && isLoading}
+                />
+                {paymentMethod === 'CASH' && errorMessage}
+                <Paypal
+                    setError={setError}
+                    loading={paymentMethod === 'PAYPAL' && isLoading}
+                />
+                {paymentMethod === 'PAYPAL' && errorMessage}
             </Segment>
         </>
     )

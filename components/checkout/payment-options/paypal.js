@@ -1,7 +1,7 @@
 import { Button, Icon } from 'semantic-ui-react'
 import { useFormikContext } from 'formik'
 
-export default function Paypal({ loading }) {
+export default function Paypal({ setError, loading }) {
     const { setFieldValue } = useFormikContext()
 
     return (
@@ -9,8 +9,9 @@ export default function Paypal({ loading }) {
             color="blue"
             type="submit"
             loading={loading}
-            style={{ width: '100%' }}
+            style={{ width: '100%', marginBottom: '1em' }}
             onClick={() => {
+                setError('')
                 setFieldValue('paymentMethod', 'PAYPAL', 0)
             }}
         >
