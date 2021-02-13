@@ -25,7 +25,7 @@ export default function Store({ products }) {
             <DeliveryTerms />
             <Logo />
             <Countdown
-                targetDate={new Date('2021-02-13T00:00')}
+                targetDate={new Date('2021-02-15T00:00')}
                 header="10% Discount on all Orders"
                 timesUp="Sale is over."
             />
